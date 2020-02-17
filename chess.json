@@ -1,0 +1,2006 @@
+{
+    "name": "Integration Webhooks, JSON, Tools, Data store, Email, HTTP, Google Sheets",
+    "flow": [
+        {
+            "id": 1,
+            "module": "gateway:CustomWebHook",
+            "version": 1,
+            "parameters": {
+                "hook": 308579,
+                "maxResults": 2
+            },
+            "mapper": {},
+            "metadata": {
+                "designer": {
+                    "x": -325,
+                    "y": 0
+                },
+                "restore": {
+                    "hook": {
+                        "label": "Gateway-webhook "
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "hook",
+                        "type": "hook",
+                        "label": "Webhook",
+                        "required": true
+                    },
+                    {
+                        "name": "maxResults",
+                        "type": "number",
+                        "label": "Maximum number of results"
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "value",
+                        "type": "text"
+                    }
+                ],
+                "advanced": true
+            }
+        },
+        {
+            "id": 2,
+            "module": "json:ParseJSON",
+            "version": 1,
+            "parameters": {
+                "type": 82112
+            },
+            "mapper": {
+                "json": "{{1.value}}"
+            },
+            "metadata": {
+                "designer": {
+                    "x": -53,
+                    "y": 5
+                },
+                "restore": {
+                    "type": {
+                        "label": "Order Details"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "type",
+                        "type": "udt",
+                        "label": "Data structure"
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "json",
+                        "type": "text",
+                        "label": "JSON string",
+                        "required": true
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "firstname",
+                        "type": "text"
+                    },
+                    {
+                        "name": "lastname",
+                        "type": "text"
+                    },
+                    {
+                        "name": "address1",
+                        "type": "text"
+                    },
+                    {
+                        "name": "address2",
+                        "type": "text"
+                    },
+                    {
+                        "name": "city",
+                        "type": "text"
+                    },
+                    {
+                        "name": "zipcode",
+                        "type": "text"
+                    },
+                    {
+                        "name": "phone",
+                        "type": "text"
+                    },
+                    {
+                        "name": "state_name",
+                        "type": "text"
+                    },
+                    {
+                        "name": "country",
+                        "type": "text"
+                    },
+                    {
+                        "name": "selected_store",
+                        "spec": [
+                            {
+                                "name": "contact",
+                                "type": "text"
+                            },
+                            {
+                                "name": "gpsname",
+                                "type": "text"
+                            },
+                            {
+                                "name": "label",
+                                "type": "text"
+                            },
+                            {
+                                "name": "landmark",
+                                "type": "text"
+                            },
+                            {
+                                "name": "latitude",
+                                "type": "number"
+                            },
+                            {
+                                "name": "longitude",
+                                "type": "number"
+                            }
+                        ],
+                        "type": "collection"
+                    },
+                    {
+                        "name": "items",
+                        "spec": {
+                            "spec": [
+                                {
+                                    "name": "product_name",
+                                    "type": "text"
+                                },
+                                {
+                                    "name": "item_qty",
+                                    "type": "number"
+                                },
+                                {
+                                    "name": "line_subtotal",
+                                    "type": "text"
+                                },
+                                {
+                                    "name": "line_total",
+                                    "type": "text"
+                                }
+                            ],
+                            "type": "collection"
+                        },
+                        "type": "array"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 3,
+            "module": "util:SetVariable",
+            "version": 1,
+            "parameters": {},
+            "mapper": {
+                "name": "{{1.value}}",
+                "scope": "roundtrip",
+                "value": "{{1.value}}"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 247,
+                    "y": 5,
+                    "name": "Extract an item"
+                },
+                "restore": {
+                    "scope": {
+                        "label": "One cycle"
+                    }
+                },
+                "expect": [
+                    {
+                        "name": "name",
+                        "type": "text",
+                        "label": "Variable name",
+                        "required": true
+                    },
+                    {
+                        "name": "scope",
+                        "type": "select",
+                        "label": "Variable lifetime",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "roundtrip",
+                                "execution"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "value",
+                        "type": "any",
+                        "label": "Variable value"
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "value",
+                        "type": "any",
+                        "label": "{\"id\":81,\"parent_id\":0,\"number\":\"81\",\"order_key\":\"wc_order_95XBeI3NSjRld\",\"created_via\":\"admin\",\"version\":\"3.9.1\",\"status\":\"pending\",\"currency\":\"GHS\",\"date_created\":\"2020-02-11T10:18:32\",\"date_created_gmt\":\"2020-02-11T10:18:32\",\"date_modified\":\"2020-02-11T10:19:06\",\"date_modified_gmt\":\"2020-02-11T10:19:06\",\"discount_total\":\"0.00\",\"discount_tax\":\"0.00\",\"shipping_total\":\"0.00\",\"shipping_tax\":\"0.00\",\"cart_tax\":\"0.00\",\"total\":\"60.00\",\"total_tax\":\"0.00\",\"prices_include_tax\":false,\"customer_id\":0,\"customer_ip_address\":\"\",\"customer_user_agent\":\"\",\"customer_note\":\"\",\"billing\":{\"first_name\":\"\",\"last_name\":\"\",\"company\":\"\",\"address_1\":\"\",\"address_2\":\"\",\"city\":\"\",\"state\":\"\",\"postcode\":\"\",\"country\":\"\",\"email\":\"\",\"phone\":\"\"},\"shipping\":{\"first_name\":\"\",\"last_name\":\"\",\"company\":\"\",\"address_1\":\"\",\"address_2\":\"\",\"city\":\"\",\"state\":\"\",\"postcode\":\"\",\"country\":\"\"},\"payment_method\":\"\",\"payment_method_title\":\"\",\"transaction_id\":\"\",\"date_paid\":null,\"date_paid_gmt\":null,\"date_completed\":null,\"date_completed_gmt\":null,\"cart_hash\":\"\",\"meta_data\":[],\"line_items\":[{\"id\":28,\"name\":\"Milk Forrmula\",\"product_id\":14,\"variation_id\":0,\"quantity\":1,\"tax_class\":\"\",\"subtotal\":\"60.00\",\"subtotal_tax\":\"0.00\",\"total\":\"60.00\",\"total_tax\":\"0.00\",\"taxes\":[],\"meta_data\":[],\"sku\":\"\",\"price\":60}],\"tax_lines\":[],\"shipping_lines\":[],\"fee_lines\":[],\"coupon_lines\":[],\"refunds\":[],\"_links\":{\"self\":[{\"href\":\"http:\\/\\/localhost\\/wordpress\\/index.php\\/wp-json\\/wc\\/v3\\/orders\\/81\"}],\"collection\":[{\"href\":\"http:\\/\\/localhost\\/wordpress\\/index.php\\/wp-json\\/wc\\/v3\\/orders\"}]}}"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 4,
+            "module": "builtin:BasicRouter",
+            "version": 1,
+            "mapper": null,
+            "metadata": {
+                "designer": {
+                    "x": 547,
+                    "y": 5
+                }
+            },
+            "routes": [
+                {
+                    "flow": [
+                        {
+                            "id": 5,
+                            "module": "datastore:AddRecord",
+                            "version": 1,
+                            "parameters": {
+                                "datastore": 14508
+                            },
+                            "mapper": {
+                                "key": "",
+                                "data": {
+                                    "city": "{{2.city}}",
+                                    "items": "{{2.items}}",
+                                    "phone": "{{2.phone}}",
+                                    "country": "{{2.country}}",
+                                    "zipcode": "{{2.zipcode}}",
+                                    "address1": "{{2.address1}}",
+                                    "address2": "{{2.address2}}",
+                                    "lastname": "{{2.lastname}}",
+                                    "firstname": "{{2.firstname}}",
+                                    "state_name": "{{2.state_name}}",
+                                    "selected_store": {
+                                        "label": "{{2.selected_store.label}}",
+                                        "contact": "{{2.selected_store.contact}}",
+                                        "gpsname": "{{2.selected_store.gpsname}}",
+                                        "landmark": "{{2.selected_store.landmark}}",
+                                        "latitude": "{{2.selected_store.latitude}}",
+                                        "longitude": "{{2.selected_store.longitude}}"
+                                    }
+                                },
+                                "overwrite": "false"
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 847,
+                                    "y": -445
+                                },
+                                "restore": {
+                                    "data": {
+                                        "nested": {
+                                            "items": {
+                                                "mode": "edit"
+                                            }
+                                        }
+                                    },
+                                    "datastore": {
+                                        "label": "Orders"
+                                    },
+                                    "overwrite": {
+                                        "mode": "edit"
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "datastore",
+                                        "type": "datastore",
+                                        "label": "Data store",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "key",
+                                        "type": "text",
+                                        "label": "Key"
+                                    },
+                                    {
+                                        "name": "overwrite",
+                                        "type": "boolean",
+                                        "label": "Overwrite an existing record",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "data",
+                                        "spec": [
+                                            {
+                                                "name": "selected_store",
+                                                "spec": [
+                                                    {
+                                                        "name": "contact",
+                                                        "type": "text"
+                                                    },
+                                                    {
+                                                        "name": "gpsname",
+                                                        "type": "text"
+                                                    },
+                                                    {
+                                                        "name": "label",
+                                                        "type": "text"
+                                                    },
+                                                    {
+                                                        "name": "landmark",
+                                                        "type": "text"
+                                                    },
+                                                    {
+                                                        "name": "latitude",
+                                                        "type": "number"
+                                                    },
+                                                    {
+                                                        "name": "longitude",
+                                                        "type": "number"
+                                                    }
+                                                ],
+                                                "type": "collection",
+                                                "label": "selected_store",
+                                                "required": false
+                                            },
+                                            {
+                                                "name": "firstname",
+                                                "type": "text"
+                                            },
+                                            {
+                                                "name": "lastname",
+                                                "type": "text"
+                                            },
+                                            {
+                                                "name": "address1",
+                                                "type": "text"
+                                            },
+                                            {
+                                                "name": "address2",
+                                                "type": "text"
+                                            },
+                                            {
+                                                "name": "city",
+                                                "type": "text"
+                                            },
+                                            {
+                                                "name": "zipcode",
+                                                "type": "text"
+                                            },
+                                            {
+                                                "name": "phone",
+                                                "type": "text"
+                                            },
+                                            {
+                                                "name": "state_name",
+                                                "type": "text"
+                                            },
+                                            {
+                                                "name": "country",
+                                                "type": "text"
+                                            },
+                                            {
+                                                "name": "items",
+                                                "spec": [
+                                                    {
+                                                        "name": "product_name",
+                                                        "type": "text"
+                                                    },
+                                                    {
+                                                        "name": "item_qty",
+                                                        "type": "number"
+                                                    },
+                                                    {
+                                                        "name": "line_subtotal",
+                                                        "type": "text"
+                                                    },
+                                                    {
+                                                        "name": "line_total",
+                                                        "type": "text"
+                                                    }
+                                                ],
+                                                "type": "array"
+                                            }
+                                        ],
+                                        "type": "collection",
+                                        "label": "Record"
+                                    }
+                                ]
+                            },
+                            "onerror": [
+                                {
+                                    "id": 9,
+                                    "module": "email:ActionSendEmail",
+                                    "version": 6,
+                                    "parameters": {
+                                        "account": 1015755,
+                                        "saveAfterSent": false
+                                    },
+                                    "mapper": {
+                                        "cc": [],
+                                        "to": [
+                                            "serviceschess@gmail.com"
+                                        ],
+                                        "bcc": [],
+                                        "from": "",
+                                        "html": "",
+                                        "sender": "",
+                                        "headers": [],
+                                        "replyTo": "",
+                                        "subject": "",
+                                        "priority": "normal",
+                                        "inReplyTo": "",
+                                        "references": [],
+                                        "attachments": [
+                                            {
+                                                "cid": "",
+                                                "data": "{{5.error.type}}\n{{5.error.message}}\n{{5.error.detail}}",
+                                                "fileName": "Errors"
+                                            }
+                                        ],
+                                        "contentType": "html"
+                                    },
+                                    "metadata": {
+                                        "designer": {
+                                            "x": 1147,
+                                            "y": -445,
+                                            "name": "Error Handler"
+                                        },
+                                        "restore": {
+                                            "cc": {
+                                                "mode": "chose",
+                                                "items": []
+                                            },
+                                            "to": {
+                                                "mode": "chose",
+                                                "items": [
+                                                    "undefined"
+                                                ]
+                                            },
+                                            "bcc": {
+                                                "mode": "chose",
+                                                "items": []
+                                            },
+                                            "account": {
+                                                "label": "Chess (serviceschess@gmail.com)"
+                                            },
+                                            "headers": {
+                                                "items": []
+                                            },
+                                            "priority": {
+                                                "label": "Normal"
+                                            },
+                                            "references": {
+                                                "mode": "chose",
+                                                "items": []
+                                            },
+                                            "attachments": {
+                                                "mode": "chose",
+                                                "items": [
+                                                    "undefined"
+                                                ]
+                                            },
+                                            "contentType": {
+                                                "label": "HTML"
+                                            },
+                                            "saveAfterSent": {
+                                                "label": "No"
+                                            }
+                                        },
+                                        "parameters": [
+                                            {
+                                                "name": "account",
+                                                "type": "account",
+                                                "label": "Connection",
+                                                "required": true
+                                            },
+                                            {
+                                                "name": "saveAfterSent",
+                                                "type": "select",
+                                                "label": "Save message after sending",
+                                                "required": true,
+                                                "validate": {
+                                                    "enum": [
+                                                        true,
+                                                        false
+                                                    ]
+                                                }
+                                            }
+                                        ],
+                                        "expect": [
+                                            {
+                                                "name": "to",
+                                                "spec": {
+                                                    "name": "email",
+                                                    "type": "email",
+                                                    "label": "Email address",
+                                                    "required": true
+                                                },
+                                                "type": "array",
+                                                "label": "To",
+                                                "labels": {
+                                                    "add": "Add a recipient",
+                                                    "edit": "Edit a recipient"
+                                                },
+                                                "required": true
+                                            },
+                                            {
+                                                "name": "subject",
+                                                "type": "text",
+                                                "label": "Subject"
+                                            },
+                                            {
+                                                "name": "contentType",
+                                                "type": "select",
+                                                "label": "Content Type",
+                                                "required": true,
+                                                "validate": {
+                                                    "enum": [
+                                                        "html",
+                                                        "text"
+                                                    ]
+                                                }
+                                            },
+                                            {
+                                                "name": "attachments",
+                                                "spec": [
+                                                    {
+                                                        "name": "fileName",
+                                                        "type": "filename",
+                                                        "label": "File name",
+                                                        "required": true,
+                                                        "semantic": "file:name"
+                                                    },
+                                                    {
+                                                        "name": "data",
+                                                        "type": "buffer",
+                                                        "label": "Data",
+                                                        "required": true,
+                                                        "semantic": "file:data"
+                                                    },
+                                                    {
+                                                        "name": "cid",
+                                                        "type": "text",
+                                                        "label": "Content-ID"
+                                                    }
+                                                ],
+                                                "type": "array",
+                                                "label": "Attachments",
+                                                "labels": {
+                                                    "add": "Add an attachment",
+                                                    "edit": "Edit an attachment"
+                                                }
+                                            },
+                                            {
+                                                "name": "cc",
+                                                "spec": {
+                                                    "name": "email",
+                                                    "type": "email",
+                                                    "label": "Email address"
+                                                },
+                                                "type": "array",
+                                                "label": "Copy recipient",
+                                                "labels": {
+                                                    "add": "Add a copy recipient",
+                                                    "edit": "Edit a copy recipient"
+                                                }
+                                            },
+                                            {
+                                                "name": "bcc",
+                                                "spec": {
+                                                    "name": "email",
+                                                    "type": "email",
+                                                    "label": "Email address"
+                                                },
+                                                "type": "array",
+                                                "label": "Blind copy recipient",
+                                                "labels": {
+                                                    "add": "Add a blind copy recipient",
+                                                    "edit": "Edit a blind copy recipient"
+                                                }
+                                            },
+                                            {
+                                                "name": "sender",
+                                                "type": "email",
+                                                "label": "Sender"
+                                            },
+                                            {
+                                                "name": "replyTo",
+                                                "type": "text",
+                                                "label": "Reply-To"
+                                            },
+                                            {
+                                                "name": "inReplyTo",
+                                                "type": "text",
+                                                "label": "In-Reply-To"
+                                            },
+                                            {
+                                                "name": "references",
+                                                "spec": {
+                                                    "type": "text",
+                                                    "label": "Reference",
+                                                    "required": true
+                                                },
+                                                "type": "array",
+                                                "label": "References"
+                                            },
+                                            {
+                                                "name": "priority",
+                                                "type": "select",
+                                                "label": "Priority",
+                                                "validate": {
+                                                    "enum": [
+                                                        "high",
+                                                        "normal",
+                                                        "low"
+                                                    ]
+                                                }
+                                            },
+                                            {
+                                                "name": "headers",
+                                                "spec": [
+                                                    {
+                                                        "name": "key",
+                                                        "type": "text",
+                                                        "label": "Key",
+                                                        "required": true
+                                                    },
+                                                    {
+                                                        "name": "value",
+                                                        "type": "text",
+                                                        "label": "Value",
+                                                        "required": true
+                                                    }
+                                                ],
+                                                "type": "array",
+                                                "label": "Headers"
+                                            },
+                                            {
+                                                "name": "from",
+                                                "type": "text",
+                                                "label": "From"
+                                            },
+                                            {
+                                                "name": "html",
+                                                "type": "text",
+                                                "label": "Content"
+                                            }
+                                        ]
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "flow": [
+                        {
+                            "id": 6,
+                            "module": "email:ActionSendEmail",
+                            "version": 6,
+                            "parameters": {
+                                "account": 1015755,
+                                "saveAfterSent": false
+                            },
+                            "mapper": {
+                                "cc": [],
+                                "to": [
+                                    "serviceschess@gmail.com"
+                                ],
+                                "bcc": [],
+                                "from": "",
+                                "html": "",
+                                "sender": "",
+                                "headers": [],
+                                "replyTo": "",
+                                "subject": "Total Orders",
+                                "priority": "normal",
+                                "inReplyTo": "",
+                                "references": [],
+                                "attachments": [
+                                    {
+                                        "cid": "",
+                                        "data": "{{1.value}}",
+                                        "fileName": "Total Orders"
+                                    }
+                                ],
+                                "contentType": "html"
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 847,
+                                    "y": -145
+                                },
+                                "restore": {
+                                    "cc": {
+                                        "mode": "chose",
+                                        "items": []
+                                    },
+                                    "to": {
+                                        "mode": "chose",
+                                        "items": [
+                                            "undefined"
+                                        ]
+                                    },
+                                    "bcc": {
+                                        "mode": "chose",
+                                        "items": []
+                                    },
+                                    "account": {
+                                        "label": "Chess (serviceschess@gmail.com)"
+                                    },
+                                    "headers": {
+                                        "items": []
+                                    },
+                                    "priority": {
+                                        "label": "Normal"
+                                    },
+                                    "references": {
+                                        "mode": "chose",
+                                        "items": []
+                                    },
+                                    "attachments": {
+                                        "mode": "chose",
+                                        "items": [
+                                            "undefined"
+                                        ]
+                                    },
+                                    "contentType": {
+                                        "label": "HTML"
+                                    },
+                                    "saveAfterSent": {
+                                        "label": "No"
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "account",
+                                        "type": "account",
+                                        "label": "Connection",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "saveAfterSent",
+                                        "type": "select",
+                                        "label": "Save message after sending",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                true,
+                                                false
+                                            ]
+                                        }
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "to",
+                                        "spec": {
+                                            "name": "email",
+                                            "type": "email",
+                                            "label": "Email address",
+                                            "required": true
+                                        },
+                                        "type": "array",
+                                        "label": "To",
+                                        "labels": {
+                                            "add": "Add a recipient",
+                                            "edit": "Edit a recipient"
+                                        },
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "subject",
+                                        "type": "text",
+                                        "label": "Subject"
+                                    },
+                                    {
+                                        "name": "contentType",
+                                        "type": "select",
+                                        "label": "Content Type",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "html",
+                                                "text"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "attachments",
+                                        "spec": [
+                                            {
+                                                "name": "fileName",
+                                                "type": "filename",
+                                                "label": "File name",
+                                                "required": true,
+                                                "semantic": "file:name"
+                                            },
+                                            {
+                                                "name": "data",
+                                                "type": "buffer",
+                                                "label": "Data",
+                                                "required": true,
+                                                "semantic": "file:data"
+                                            },
+                                            {
+                                                "name": "cid",
+                                                "type": "text",
+                                                "label": "Content-ID"
+                                            }
+                                        ],
+                                        "type": "array",
+                                        "label": "Attachments",
+                                        "labels": {
+                                            "add": "Add an attachment",
+                                            "edit": "Edit an attachment"
+                                        }
+                                    },
+                                    {
+                                        "name": "cc",
+                                        "spec": {
+                                            "name": "email",
+                                            "type": "email",
+                                            "label": "Email address"
+                                        },
+                                        "type": "array",
+                                        "label": "Copy recipient",
+                                        "labels": {
+                                            "add": "Add a copy recipient",
+                                            "edit": "Edit a copy recipient"
+                                        }
+                                    },
+                                    {
+                                        "name": "bcc",
+                                        "spec": {
+                                            "name": "email",
+                                            "type": "email",
+                                            "label": "Email address"
+                                        },
+                                        "type": "array",
+                                        "label": "Blind copy recipient",
+                                        "labels": {
+                                            "add": "Add a blind copy recipient",
+                                            "edit": "Edit a blind copy recipient"
+                                        }
+                                    },
+                                    {
+                                        "name": "sender",
+                                        "type": "email",
+                                        "label": "Sender"
+                                    },
+                                    {
+                                        "name": "replyTo",
+                                        "type": "text",
+                                        "label": "Reply-To"
+                                    },
+                                    {
+                                        "name": "inReplyTo",
+                                        "type": "text",
+                                        "label": "In-Reply-To"
+                                    },
+                                    {
+                                        "name": "references",
+                                        "spec": {
+                                            "type": "text",
+                                            "label": "Reference",
+                                            "required": true
+                                        },
+                                        "type": "array",
+                                        "label": "References"
+                                    },
+                                    {
+                                        "name": "priority",
+                                        "type": "select",
+                                        "label": "Priority",
+                                        "validate": {
+                                            "enum": [
+                                                "high",
+                                                "normal",
+                                                "low"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "headers",
+                                        "spec": [
+                                            {
+                                                "name": "key",
+                                                "type": "text",
+                                                "label": "Key",
+                                                "required": true
+                                            },
+                                            {
+                                                "name": "value",
+                                                "type": "text",
+                                                "label": "Value",
+                                                "required": true
+                                            }
+                                        ],
+                                        "type": "array",
+                                        "label": "Headers"
+                                    },
+                                    {
+                                        "name": "from",
+                                        "type": "text",
+                                        "label": "From"
+                                    },
+                                    {
+                                        "name": "html",
+                                        "type": "text",
+                                        "label": "Content"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "flow": [
+                        {
+                            "id": 7,
+                            "module": "http:ActionSendDataBasicAuth",
+                            "version": 3,
+                            "parameters": {
+                                "key": 6413,
+                                "handleErrors": false
+                            },
+                            "mapper": {
+                                "ca": "",
+                                "qs": [],
+                                "url": "https://api.hubtel.com/v1/messages",
+                                "data": "{\n    \"From\":\"Turntabl\",\n    \"To\":\"{{2.phone}}\",\n    \"Content\":\"Thank you. Your order has been received successfully!\"\n}",
+                                "gzip": true,
+                                "method": "post",
+                                "headers": [
+                                    {
+                                        "name": "Authorization",
+                                        "value": "Basic cWhsbGp4bG86dW9hbW9rZXE="
+                                    }
+                                ],
+                                "timeout": "",
+                                "bodyType": "raw",
+                                "contentType": "application/json",
+                                "shareCookies": false,
+                                "parseResponse": false,
+                                "followRedirect": true,
+                                "useQuerystring": false,
+                                "rejectUnauthorized": true
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 847,
+                                    "y": 155
+                                },
+                                "restore": {
+                                    "qs": {
+                                        "mode": "chose",
+                                        "items": []
+                                    },
+                                    "key": {
+                                        "label": "HTTP Basic Auth key"
+                                    },
+                                    "method": {
+                                        "mode": "chose",
+                                        "label": "POST"
+                                    },
+                                    "headers": {
+                                        "mode": "chose",
+                                        "items": [
+                                            "undefined"
+                                        ]
+                                    },
+                                    "bodyType": {
+                                        "label": "Raw"
+                                    },
+                                    "contentType": {
+                                        "label": "JSON (application/json)"
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "key",
+                                        "type": "keychain",
+                                        "label": "Credentials",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "handleErrors",
+                                        "type": "boolean",
+                                        "label": "Evaluate all states as errors (except for 2xx and 3xx )",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "url",
+                                        "type": "url",
+                                        "label": "URL",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "method",
+                                        "type": "select",
+                                        "label": "Method",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "get",
+                                                "head",
+                                                "post",
+                                                "put",
+                                                "patch",
+                                                "delete"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "headers",
+                                        "spec": [
+                                            {
+                                                "name": "name",
+                                                "type": "text",
+                                                "label": "Name",
+                                                "required": true
+                                            },
+                                            {
+                                                "name": "value",
+                                                "type": "text",
+                                                "label": "Value"
+                                            }
+                                        ],
+                                        "type": "array",
+                                        "label": "Headers",
+                                        "labels": {
+                                            "add": "Add a header",
+                                            "edit": "Edit a header"
+                                        }
+                                    },
+                                    {
+                                        "name": "qs",
+                                        "spec": [
+                                            {
+                                                "name": "name",
+                                                "type": "text",
+                                                "label": "Name",
+                                                "required": true
+                                            },
+                                            {
+                                                "name": "value",
+                                                "type": "text",
+                                                "label": "Value"
+                                            }
+                                        ],
+                                        "type": "array",
+                                        "label": "Query String",
+                                        "labels": {
+                                            "add": "Add parameter",
+                                            "edit": "Edit parameter"
+                                        }
+                                    },
+                                    {
+                                        "name": "bodyType",
+                                        "type": "select",
+                                        "label": "Body type",
+                                        "validate": {
+                                            "enum": [
+                                                "raw",
+                                                "x_www_form_urlencoded",
+                                                "multipart_form_data"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "parseResponse",
+                                        "type": "boolean",
+                                        "label": "Parse response",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "timeout",
+                                        "type": "uinteger",
+                                        "label": "Timeout",
+                                        "validate": {
+                                            "max": 300,
+                                            "min": 1
+                                        }
+                                    },
+                                    {
+                                        "name": "shareCookies",
+                                        "type": "boolean",
+                                        "label": "Share cookies with other HTTP modules",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "ca",
+                                        "type": "cert",
+                                        "label": "Self-signed certificate",
+                                        "multiline": true
+                                    },
+                                    {
+                                        "name": "rejectUnauthorized",
+                                        "type": "boolean",
+                                        "label": "Reject connections that are using unverified (self-signed) certificates",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "followRedirect",
+                                        "type": "boolean",
+                                        "label": "Follow redirect",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "useQuerystring",
+                                        "type": "boolean",
+                                        "label": "Disable serialization of multiple same query string keys as arrays",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "gzip",
+                                        "type": "boolean",
+                                        "label": "Request compressed content",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "contentType",
+                                        "type": "select",
+                                        "label": "Content type",
+                                        "validate": {
+                                            "enum": [
+                                                "text/plain",
+                                                "application/json",
+                                                "application/xml",
+                                                "text/xml",
+                                                "text/html",
+                                                "custom"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "data",
+                                        "type": "buffer",
+                                        "label": "Request content"
+                                    }
+                                ],
+                                "advanced": true
+                            },
+                            "onerror": [
+                                {
+                                    "id": 10,
+                                    "module": "email:ActionSendEmail",
+                                    "version": 6,
+                                    "parameters": {
+                                        "account": 1015755,
+                                        "saveAfterSent": false
+                                    },
+                                    "mapper": {
+                                        "cc": [],
+                                        "to": [
+                                            "serviceschess@gmail.com"
+                                        ],
+                                        "bcc": [],
+                                        "from": "",
+                                        "html": "",
+                                        "sender": "",
+                                        "headers": [],
+                                        "replyTo": "",
+                                        "subject": "Error Handler",
+                                        "priority": "normal",
+                                        "inReplyTo": "",
+                                        "references": [],
+                                        "attachments": [
+                                            {
+                                                "cid": "",
+                                                "data": "{{7.error.type}}\n{{7.error.message}}\n{{7.error.detail}}",
+                                                "fileName": "Errors"
+                                            }
+                                        ],
+                                        "contentType": "html"
+                                    },
+                                    "metadata": {
+                                        "designer": {
+                                            "x": 1147,
+                                            "y": 155,
+                                            "name": "Error Handler"
+                                        },
+                                        "restore": {
+                                            "cc": {
+                                                "mode": "chose",
+                                                "items": []
+                                            },
+                                            "to": {
+                                                "mode": "chose",
+                                                "items": [
+                                                    "undefined"
+                                                ]
+                                            },
+                                            "bcc": {
+                                                "mode": "chose",
+                                                "items": []
+                                            },
+                                            "account": {
+                                                "label": "Chess (serviceschess@gmail.com)"
+                                            },
+                                            "headers": {
+                                                "items": []
+                                            },
+                                            "priority": {
+                                                "label": "Normal"
+                                            },
+                                            "references": {
+                                                "mode": "chose",
+                                                "items": []
+                                            },
+                                            "attachments": {
+                                                "mode": "chose",
+                                                "items": [
+                                                    "undefined"
+                                                ]
+                                            },
+                                            "contentType": {
+                                                "label": "HTML"
+                                            },
+                                            "saveAfterSent": {
+                                                "label": "No"
+                                            }
+                                        },
+                                        "parameters": [
+                                            {
+                                                "name": "account",
+                                                "type": "account",
+                                                "label": "Connection",
+                                                "required": true
+                                            },
+                                            {
+                                                "name": "saveAfterSent",
+                                                "type": "select",
+                                                "label": "Save message after sending",
+                                                "required": true,
+                                                "validate": {
+                                                    "enum": [
+                                                        true,
+                                                        false
+                                                    ]
+                                                }
+                                            }
+                                        ],
+                                        "expect": [
+                                            {
+                                                "name": "to",
+                                                "spec": {
+                                                    "name": "email",
+                                                    "type": "email",
+                                                    "label": "Email address",
+                                                    "required": true
+                                                },
+                                                "type": "array",
+                                                "label": "To",
+                                                "labels": {
+                                                    "add": "Add a recipient",
+                                                    "edit": "Edit a recipient"
+                                                },
+                                                "required": true
+                                            },
+                                            {
+                                                "name": "subject",
+                                                "type": "text",
+                                                "label": "Subject"
+                                            },
+                                            {
+                                                "name": "contentType",
+                                                "type": "select",
+                                                "label": "Content Type",
+                                                "required": true,
+                                                "validate": {
+                                                    "enum": [
+                                                        "html",
+                                                        "text"
+                                                    ]
+                                                }
+                                            },
+                                            {
+                                                "name": "attachments",
+                                                "spec": [
+                                                    {
+                                                        "name": "fileName",
+                                                        "type": "filename",
+                                                        "label": "File name",
+                                                        "required": true,
+                                                        "semantic": "file:name"
+                                                    },
+                                                    {
+                                                        "name": "data",
+                                                        "type": "buffer",
+                                                        "label": "Data",
+                                                        "required": true,
+                                                        "semantic": "file:data"
+                                                    },
+                                                    {
+                                                        "name": "cid",
+                                                        "type": "text",
+                                                        "label": "Content-ID"
+                                                    }
+                                                ],
+                                                "type": "array",
+                                                "label": "Attachments",
+                                                "labels": {
+                                                    "add": "Add an attachment",
+                                                    "edit": "Edit an attachment"
+                                                }
+                                            },
+                                            {
+                                                "name": "cc",
+                                                "spec": {
+                                                    "name": "email",
+                                                    "type": "email",
+                                                    "label": "Email address"
+                                                },
+                                                "type": "array",
+                                                "label": "Copy recipient",
+                                                "labels": {
+                                                    "add": "Add a copy recipient",
+                                                    "edit": "Edit a copy recipient"
+                                                }
+                                            },
+                                            {
+                                                "name": "bcc",
+                                                "spec": {
+                                                    "name": "email",
+                                                    "type": "email",
+                                                    "label": "Email address"
+                                                },
+                                                "type": "array",
+                                                "label": "Blind copy recipient",
+                                                "labels": {
+                                                    "add": "Add a blind copy recipient",
+                                                    "edit": "Edit a blind copy recipient"
+                                                }
+                                            },
+                                            {
+                                                "name": "sender",
+                                                "type": "email",
+                                                "label": "Sender"
+                                            },
+                                            {
+                                                "name": "replyTo",
+                                                "type": "text",
+                                                "label": "Reply-To"
+                                            },
+                                            {
+                                                "name": "inReplyTo",
+                                                "type": "text",
+                                                "label": "In-Reply-To"
+                                            },
+                                            {
+                                                "name": "references",
+                                                "spec": {
+                                                    "type": "text",
+                                                    "label": "Reference",
+                                                    "required": true
+                                                },
+                                                "type": "array",
+                                                "label": "References"
+                                            },
+                                            {
+                                                "name": "priority",
+                                                "type": "select",
+                                                "label": "Priority",
+                                                "validate": {
+                                                    "enum": [
+                                                        "high",
+                                                        "normal",
+                                                        "low"
+                                                    ]
+                                                }
+                                            },
+                                            {
+                                                "name": "headers",
+                                                "spec": [
+                                                    {
+                                                        "name": "key",
+                                                        "type": "text",
+                                                        "label": "Key",
+                                                        "required": true
+                                                    },
+                                                    {
+                                                        "name": "value",
+                                                        "type": "text",
+                                                        "label": "Value",
+                                                        "required": true
+                                                    }
+                                                ],
+                                                "type": "array",
+                                                "label": "Headers"
+                                            },
+                                            {
+                                                "name": "from",
+                                                "type": "text",
+                                                "label": "From"
+                                            },
+                                            {
+                                                "name": "html",
+                                                "type": "text",
+                                                "label": "Content"
+                                            }
+                                        ]
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "flow": [
+                        {
+                            "id": 8,
+                            "module": "google-sheets:addRow",
+                            "version": 2,
+                            "parameters": {
+                                "__IMTCONN__": 1015755
+                            },
+                            "mapper": {
+                                "mode": "select",
+                                "valueInputOption": "USER_ENTERED",
+                                "insertDataOption": "INSERT_ROWS",
+                                "spreadsheetId": "12VcHgVoGSmIx84bA8uJV2HGnYFi2svTrhqgNC5TW9LU",
+                                "sheetId": "Sheet1",
+                                "includesHeaders": true,
+                                "values": {
+                                    "0": "{{2.firstname}}",
+                                    "1": "{{2.lastname}}",
+                                    "2": "{{2.address1}}",
+                                    "3": "{{2.address2}}",
+                                    "4": "{{2.city}}",
+                                    "5": "{{2.zipcode}}",
+                                    "6": "{{2.phone}}",
+                                    "7": "{{2.state_name}}",
+                                    "8": "{{2.country}}",
+                                    "9": "{{2.selected_store.contact}}",
+                                    "10": "{{2.selected_store.gpsname}}",
+                                    "11": "{{2.selected_store.label}}",
+                                    "12": "{{2.selected_store.landmark}}",
+                                    "13": "{{2.selected_store.latitude}}",
+                                    "14": "{{2.selected_store.longitude}}",
+                                    "15": "{{2.items[].product_name}}",
+                                    "16": "{{2.items[].item_qty}}",
+                                    "17": "{{2.items[].line_subtotal}}",
+                                    "18": "{{2.items[].line_total}}",
+                                    "19": "{{2.items}}"
+                                }
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 847,
+                                    "y": 455
+                                },
+                                "restore": {
+                                    "__IMTCONN__": {
+                                        "label": "Chess (serviceschess@gmail.com)"
+                                    },
+                                    "mode": {
+                                        "label": "Select spreadsheet and sheet"
+                                    },
+                                    "valueInputOption": {
+                                        "mode": "chose",
+                                        "label": "User entered"
+                                    },
+                                    "insertDataOption": {
+                                        "mode": "chose",
+                                        "label": "Insert rows"
+                                    },
+                                    "spreadsheetId": {
+                                        "label": "Report"
+                                    },
+                                    "sheetId": {
+                                        "label": "Sheet1"
+                                    },
+                                    "includesHeaders": {
+                                        "label": "Yes"
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "__IMTCONN__",
+                                        "type": "account",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "mode",
+                                        "type": "select",
+                                        "label": "Mode",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "select",
+                                                "map"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "valueInputOption",
+                                        "type": "select",
+                                        "label": "Value input option",
+                                        "validate": {
+                                            "enum": [
+                                                "USER_ENTERED",
+                                                "RAW"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "insertDataOption",
+                                        "type": "select",
+                                        "label": "Insert data option",
+                                        "validate": {
+                                            "enum": [
+                                                "INSERT_ROWS",
+                                                "OVERWRITE"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "spreadsheetId",
+                                        "type": "select",
+                                        "label": "Spreadsheet",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "sheetId",
+                                        "type": "select",
+                                        "label": "Sheet",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "includesHeaders",
+                                        "type": "select",
+                                        "label": "Table contains headers",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                true,
+                                                false
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "values",
+                                        "type": "collection",
+                                        "label": "Values",
+                                        "spec": [
+                                            {
+                                                "name": "__SPREADSHEET_ID__",
+                                                "label": "Spreadsheet ID",
+                                                "type": "text"
+                                            },
+                                            {
+                                                "name": "__SHEET__",
+                                                "label": "Sheet",
+                                                "type": "text"
+                                            },
+                                            {
+                                                "name": "0",
+                                                "label": "first name (A)",
+                                                "type": "text"
+                                            },
+                                            {
+                                                "name": "1",
+                                                "label": "last name (B)",
+                                                "type": "text"
+                                            },
+                                            {
+                                                "name": "2",
+                                                "label": "address 1 (C)",
+                                                "type": "text"
+                                            },
+                                            {
+                                                "name": "3",
+                                                "label": "address 2 (D)",
+                                                "type": "text"
+                                            },
+                                            {
+                                                "name": "4",
+                                                "label": "city (E)",
+                                                "type": "text"
+                                            },
+                                            {
+                                                "name": "5",
+                                                "label": "zipcode (F)",
+                                                "type": "text"
+                                            },
+                                            {
+                                                "name": "6",
+                                                "label": "phone (G)",
+                                                "type": "text"
+                                            },
+                                            {
+                                                "name": "7",
+                                                "label": "state_name (H)",
+                                                "type": "text"
+                                            },
+                                            {
+                                                "name": "8",
+                                                "label": "country (I)",
+                                                "type": "text"
+                                            },
+                                            {
+                                                "name": "9",
+                                                "label": "contact (J)",
+                                                "type": "text"
+                                            },
+                                            {
+                                                "name": "10",
+                                                "label": "gps_name (K)",
+                                                "type": "text"
+                                            },
+                                            {
+                                                "name": "11",
+                                                "label": "label (L)",
+                                                "type": "text"
+                                            },
+                                            {
+                                                "name": "12",
+                                                "label": "landmark (M)",
+                                                "type": "text"
+                                            },
+                                            {
+                                                "name": "13",
+                                                "label": "latitude (N)",
+                                                "type": "text"
+                                            },
+                                            {
+                                                "name": "14",
+                                                "label": "longitude (O)",
+                                                "type": "text"
+                                            },
+                                            {
+                                                "name": "15",
+                                                "label": "product_name (P)",
+                                                "type": "text"
+                                            },
+                                            {
+                                                "name": "16",
+                                                "label": "item_quantity (Q)",
+                                                "type": "text"
+                                            },
+                                            {
+                                                "name": "17",
+                                                "label": "line_subtotal (R)",
+                                                "type": "text"
+                                            },
+                                            {
+                                                "name": "18",
+                                                "label": "line_total (S)",
+                                                "type": "text"
+                                            },
+                                            {
+                                                "name": "19",
+                                                "label": "(T)",
+                                                "type": "text"
+                                            },
+                                            {
+                                                "name": "20",
+                                                "label": "(U)",
+                                                "type": "text"
+                                            },
+                                            {
+                                                "name": "21",
+                                                "label": "(V)",
+                                                "type": "text"
+                                            },
+                                            {
+                                                "name": "22",
+                                                "label": "(W)",
+                                                "type": "text"
+                                            },
+                                            {
+                                                "name": "23",
+                                                "label": "(X)",
+                                                "type": "text"
+                                            },
+                                            {
+                                                "name": "24",
+                                                "label": "(Y)",
+                                                "type": "text"
+                                            },
+                                            {
+                                                "name": "25",
+                                                "label": "(Z)",
+                                                "type": "text"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "advanced": true
+                            },
+                            "onerror": [
+                                {
+                                    "id": 11,
+                                    "module": "email:ActionSendEmail",
+                                    "version": 6,
+                                    "parameters": {
+                                        "account": 1015755,
+                                        "saveAfterSent": false
+                                    },
+                                    "mapper": {
+                                        "cc": [],
+                                        "to": [
+                                            "serviceschess@gmail.com"
+                                        ],
+                                        "bcc": [],
+                                        "from": "",
+                                        "html": "",
+                                        "sender": "",
+                                        "headers": [],
+                                        "replyTo": "",
+                                        "subject": "Error Handler",
+                                        "priority": "normal",
+                                        "inReplyTo": "",
+                                        "references": [],
+                                        "attachments": [
+                                            {
+                                                "cid": "",
+                                                "data": "{{8.error.type}}\n{{8.error.message}}\n{{8.error.detail}}",
+                                                "fileName": "Errors"
+                                            }
+                                        ],
+                                        "contentType": "html"
+                                    },
+                                    "metadata": {
+                                        "designer": {
+                                            "x": 1147,
+                                            "y": 455,
+                                            "name": "Error Handler"
+                                        },
+                                        "restore": {
+                                            "cc": {
+                                                "mode": "chose",
+                                                "items": []
+                                            },
+                                            "to": {
+                                                "mode": "chose",
+                                                "items": [
+                                                    "undefined"
+                                                ]
+                                            },
+                                            "bcc": {
+                                                "mode": "chose",
+                                                "items": []
+                                            },
+                                            "account": {
+                                                "label": "Chess (serviceschess@gmail.com)"
+                                            },
+                                            "headers": {
+                                                "items": []
+                                            },
+                                            "priority": {
+                                                "label": "Normal"
+                                            },
+                                            "references": {
+                                                "mode": "chose",
+                                                "items": []
+                                            },
+                                            "attachments": {
+                                                "mode": "chose",
+                                                "items": [
+                                                    "undefined"
+                                                ]
+                                            },
+                                            "contentType": {
+                                                "label": "HTML"
+                                            },
+                                            "saveAfterSent": {
+                                                "label": "No"
+                                            }
+                                        },
+                                        "parameters": [
+                                            {
+                                                "name": "account",
+                                                "type": "account",
+                                                "label": "Connection",
+                                                "required": true
+                                            },
+                                            {
+                                                "name": "saveAfterSent",
+                                                "type": "select",
+                                                "label": "Save message after sending",
+                                                "required": true,
+                                                "validate": {
+                                                    "enum": [
+                                                        true,
+                                                        false
+                                                    ]
+                                                }
+                                            }
+                                        ],
+                                        "expect": [
+                                            {
+                                                "name": "to",
+                                                "spec": {
+                                                    "name": "email",
+                                                    "type": "email",
+                                                    "label": "Email address",
+                                                    "required": true
+                                                },
+                                                "type": "array",
+                                                "label": "To",
+                                                "labels": {
+                                                    "add": "Add a recipient",
+                                                    "edit": "Edit a recipient"
+                                                },
+                                                "required": true
+                                            },
+                                            {
+                                                "name": "subject",
+                                                "type": "text",
+                                                "label": "Subject"
+                                            },
+                                            {
+                                                "name": "contentType",
+                                                "type": "select",
+                                                "label": "Content Type",
+                                                "required": true,
+                                                "validate": {
+                                                    "enum": [
+                                                        "html",
+                                                        "text"
+                                                    ]
+                                                }
+                                            },
+                                            {
+                                                "name": "attachments",
+                                                "spec": [
+                                                    {
+                                                        "name": "fileName",
+                                                        "type": "filename",
+                                                        "label": "File name",
+                                                        "required": true,
+                                                        "semantic": "file:name"
+                                                    },
+                                                    {
+                                                        "name": "data",
+                                                        "type": "buffer",
+                                                        "label": "Data",
+                                                        "required": true,
+                                                        "semantic": "file:data"
+                                                    },
+                                                    {
+                                                        "name": "cid",
+                                                        "type": "text",
+                                                        "label": "Content-ID"
+                                                    }
+                                                ],
+                                                "type": "array",
+                                                "label": "Attachments",
+                                                "labels": {
+                                                    "add": "Add an attachment",
+                                                    "edit": "Edit an attachment"
+                                                }
+                                            },
+                                            {
+                                                "name": "cc",
+                                                "spec": {
+                                                    "name": "email",
+                                                    "type": "email",
+                                                    "label": "Email address"
+                                                },
+                                                "type": "array",
+                                                "label": "Copy recipient",
+                                                "labels": {
+                                                    "add": "Add a copy recipient",
+                                                    "edit": "Edit a copy recipient"
+                                                }
+                                            },
+                                            {
+                                                "name": "bcc",
+                                                "spec": {
+                                                    "name": "email",
+                                                    "type": "email",
+                                                    "label": "Email address"
+                                                },
+                                                "type": "array",
+                                                "label": "Blind copy recipient",
+                                                "labels": {
+                                                    "add": "Add a blind copy recipient",
+                                                    "edit": "Edit a blind copy recipient"
+                                                }
+                                            },
+                                            {
+                                                "name": "sender",
+                                                "type": "email",
+                                                "label": "Sender"
+                                            },
+                                            {
+                                                "name": "replyTo",
+                                                "type": "text",
+                                                "label": "Reply-To"
+                                            },
+                                            {
+                                                "name": "inReplyTo",
+                                                "type": "text",
+                                                "label": "In-Reply-To"
+                                            },
+                                            {
+                                                "name": "references",
+                                                "spec": {
+                                                    "type": "text",
+                                                    "label": "Reference",
+                                                    "required": true
+                                                },
+                                                "type": "array",
+                                                "label": "References"
+                                            },
+                                            {
+                                                "name": "priority",
+                                                "type": "select",
+                                                "label": "Priority",
+                                                "validate": {
+                                                    "enum": [
+                                                        "high",
+                                                        "normal",
+                                                        "low"
+                                                    ]
+                                                }
+                                            },
+                                            {
+                                                "name": "headers",
+                                                "spec": [
+                                                    {
+                                                        "name": "key",
+                                                        "type": "text",
+                                                        "label": "Key",
+                                                        "required": true
+                                                    },
+                                                    {
+                                                        "name": "value",
+                                                        "type": "text",
+                                                        "label": "Value",
+                                                        "required": true
+                                                    }
+                                                ],
+                                                "type": "array",
+                                                "label": "Headers"
+                                            },
+                                            {
+                                                "name": "from",
+                                                "type": "text",
+                                                "label": "From"
+                                            },
+                                            {
+                                                "name": "html",
+                                                "type": "text",
+                                                "label": "Content"
+                                            }
+                                        ]
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "metadata": {
+        "version": 1,
+        "scenario": {
+            "roundtrips": 1,
+            "maxErrors": 3,
+            "autoCommit": false,
+            "sequential": false,
+            "confidential": false,
+            "dataloss": false,
+            "dlq": false
+        },
+        "designer": {
+            "orphans": []
+        },
+        "zone": "eu1.integromat.com"
+    }
+}
