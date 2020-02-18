@@ -689,7 +689,7 @@
                             "mapper": {
                                 "cc": [],
                                 "to": [
-                                    "serviceschess@gmail.com"
+                                    "chess@turntabl.io"
                                 ],
                                 "bcc": [],
                                 "from": "",
@@ -1436,6 +1436,35 @@
                 {
                     "flow": [
                         {
+                            "id": 16,
+                            "module": "builtin:BasicFeeder",
+                            "version": 1,
+                            "parameters": {},
+                            "mapper": {
+                                "array": "{{2.items}}"
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 510,
+                                    "y": 294
+                                },
+                                "restore": {
+                                    "array": {
+                                        "mode": "edit"
+                                    }
+                                },
+                                "expect": [
+                                    {
+                                        "mode": "edit",
+                                        "name": "array",
+                                        "spec": [],
+                                        "type": "array",
+                                        "label": "Array"
+                                    }
+                                ]
+                            }
+                        },
+                        {
                             "id": 8,
                             "module": "google-sheets:addRow",
                             "version": 2,
@@ -1444,11 +1473,6 @@
                             },
                             "mapper": {
                                 "mode": "select",
-                                "valueInputOption": "USER_ENTERED",
-                                "insertDataOption": "INSERT_ROWS",
-                                "spreadsheetId": "12VcHgVoGSmIx84bA8uJV2HGnYFi2svTrhqgNC5TW9LU",
-                                "sheetId": "Sheet1",
-                                "includesHeaders": true,
                                 "values": {
                                     "0": "{{2.firstname}}",
                                     "1": "{{2.lastname}}",
@@ -1465,41 +1489,45 @@
                                     "12": "{{2.selected_store.landmark}}",
                                     "13": "{{2.selected_store.latitude}}",
                                     "14": "{{2.selected_store.longitude}}",
-                                    "15": "{{2.items[].product_name}}",
-                                    "16": "{{2.items[].item_qty}}",
-                                    "17": "{{2.items[].line_subtotal}}",
-                                    "18": "{{2.items[].line_total}}",
-                                    "19": "{{2.items}}"
-                                }
+                                    "15": "{{16.product_name}}",
+                                    "16": "{{16.item_qty}}",
+                                    "17": "{{16.line_subtotal}}",
+                                    "18": "{{16.line_total}}"
+                                },
+                                "sheetId": "Sheet1",
+                                "spreadsheetId": "12VcHgVoGSmIx84bA8uJV2HGnYFi2svTrhqgNC5TW9LU",
+                                "includesHeaders": true,
+                                "insertDataOption": "INSERT_ROWS",
+                                "valueInputOption": "USER_ENTERED"
                             },
                             "metadata": {
                                 "designer": {
-                                    "x": 847,
-                                    "y": 455
+                                    "x": 818,
+                                    "y": 438
                                 },
                                 "restore": {
-                                    "__IMTCONN__": {
-                                        "label": "Chess (serviceschess@gmail.com)"
-                                    },
                                     "mode": {
                                         "label": "Select spreadsheet and sheet"
                                     },
-                                    "valueInputOption": {
-                                        "mode": "chose",
-                                        "label": "User entered"
+                                    "sheetId": {
+                                        "label": "Sheet1"
+                                    },
+                                    "__IMTCONN__": {
+                                        "label": "Chess (serviceschess@gmail.com)"
+                                    },
+                                    "spreadsheetId": {
+                                        "label": "Report"
+                                    },
+                                    "includesHeaders": {
+                                        "label": "Yes"
                                     },
                                     "insertDataOption": {
                                         "mode": "chose",
                                         "label": "Insert rows"
                                     },
-                                    "spreadsheetId": {
-                                        "label": "Report"
-                                    },
-                                    "sheetId": {
-                                        "label": "Sheet1"
-                                    },
-                                    "includesHeaders": {
-                                        "label": "Yes"
+                                    "valueInputOption": {
+                                        "mode": "chose",
+                                        "label": "User entered"
                                     }
                                 },
                                 "parameters": [
@@ -1571,150 +1599,150 @@
                                     },
                                     {
                                         "name": "values",
-                                        "type": "collection",
-                                        "label": "Values",
                                         "spec": [
                                             {
                                                 "name": "__SPREADSHEET_ID__",
-                                                "label": "Spreadsheet ID",
-                                                "type": "text"
+                                                "type": "text",
+                                                "label": "Spreadsheet ID"
                                             },
                                             {
                                                 "name": "__SHEET__",
-                                                "label": "Sheet",
-                                                "type": "text"
+                                                "type": "text",
+                                                "label": "Sheet"
                                             },
                                             {
                                                 "name": "0",
-                                                "label": "first name (A)",
-                                                "type": "text"
+                                                "type": "text",
+                                                "label": "first name (A)"
                                             },
                                             {
                                                 "name": "1",
-                                                "label": "last name (B)",
-                                                "type": "text"
+                                                "type": "text",
+                                                "label": "last name (B)"
                                             },
                                             {
                                                 "name": "2",
-                                                "label": "address 1 (C)",
-                                                "type": "text"
+                                                "type": "text",
+                                                "label": "address 1 (C)"
                                             },
                                             {
                                                 "name": "3",
-                                                "label": "address 2 (D)",
-                                                "type": "text"
+                                                "type": "text",
+                                                "label": "address 2 (D)"
                                             },
                                             {
                                                 "name": "4",
-                                                "label": "city (E)",
-                                                "type": "text"
+                                                "type": "text",
+                                                "label": "city (E)"
                                             },
                                             {
                                                 "name": "5",
-                                                "label": "zipcode (F)",
-                                                "type": "text"
+                                                "type": "text",
+                                                "label": "zipcode (F)"
                                             },
                                             {
                                                 "name": "6",
-                                                "label": "phone (G)",
-                                                "type": "text"
+                                                "type": "text",
+                                                "label": "phone (G)"
                                             },
                                             {
                                                 "name": "7",
-                                                "label": "state_name (H)",
-                                                "type": "text"
+                                                "type": "text",
+                                                "label": "state_name (H)"
                                             },
                                             {
                                                 "name": "8",
-                                                "label": "country (I)",
-                                                "type": "text"
+                                                "type": "text",
+                                                "label": "country (I)"
                                             },
                                             {
                                                 "name": "9",
-                                                "label": "contact (J)",
-                                                "type": "text"
+                                                "type": "text",
+                                                "label": "contact (J)"
                                             },
                                             {
                                                 "name": "10",
-                                                "label": "gps_name (K)",
-                                                "type": "text"
+                                                "type": "text",
+                                                "label": "gps_name (K)"
                                             },
                                             {
                                                 "name": "11",
-                                                "label": "label (L)",
-                                                "type": "text"
+                                                "type": "text",
+                                                "label": "label (L)"
                                             },
                                             {
                                                 "name": "12",
-                                                "label": "landmark (M)",
-                                                "type": "text"
+                                                "type": "text",
+                                                "label": "landmark (M)"
                                             },
                                             {
                                                 "name": "13",
-                                                "label": "latitude (N)",
-                                                "type": "text"
+                                                "type": "text",
+                                                "label": "latitude (N)"
                                             },
                                             {
                                                 "name": "14",
-                                                "label": "longitude (O)",
-                                                "type": "text"
+                                                "type": "text",
+                                                "label": "longitude (O)"
                                             },
                                             {
                                                 "name": "15",
-                                                "label": "product_name (P)",
-                                                "type": "text"
+                                                "type": "text",
+                                                "label": "product_name (P)"
                                             },
                                             {
                                                 "name": "16",
-                                                "label": "item_quantity (Q)",
-                                                "type": "text"
+                                                "type": "text",
+                                                "label": "item_quantity (Q)"
                                             },
                                             {
                                                 "name": "17",
-                                                "label": "line_subtotal (R)",
-                                                "type": "text"
+                                                "type": "text",
+                                                "label": "line_subtotal (R)"
                                             },
                                             {
                                                 "name": "18",
-                                                "label": "line_total (S)",
-                                                "type": "text"
+                                                "type": "text",
+                                                "label": "line_total (S)"
                                             },
                                             {
                                                 "name": "19",
-                                                "label": "(T)",
-                                                "type": "text"
+                                                "type": "text",
+                                                "label": "(T)"
                                             },
                                             {
                                                 "name": "20",
-                                                "label": "(U)",
-                                                "type": "text"
+                                                "type": "text",
+                                                "label": "(U)"
                                             },
                                             {
                                                 "name": "21",
-                                                "label": "(V)",
-                                                "type": "text"
+                                                "type": "text",
+                                                "label": "(V)"
                                             },
                                             {
                                                 "name": "22",
-                                                "label": "(W)",
-                                                "type": "text"
+                                                "type": "text",
+                                                "label": "(W)"
                                             },
                                             {
                                                 "name": "23",
-                                                "label": "(X)",
-                                                "type": "text"
+                                                "type": "text",
+                                                "label": "(X)"
                                             },
                                             {
                                                 "name": "24",
-                                                "label": "(Y)",
-                                                "type": "text"
+                                                "type": "text",
+                                                "label": "(Y)"
                                             },
                                             {
                                                 "name": "25",
-                                                "label": "(Z)",
-                                                "type": "text"
+                                                "type": "text",
+                                                "label": "(Z)"
                                             }
-                                        ]
+                                        ],
+                                        "type": "collection",
+                                        "label": "Values"
                                     }
                                 ],
                                 "advanced": true
