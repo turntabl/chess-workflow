@@ -1,5 +1,5 @@
 {
-    "name": "Integration Webhooks, JSON, Tools, Data store, Email, HTTP, Google Sheets",
+    "name": "Integration Webhooks",
     "flow": [
         {
             "id": 1,
