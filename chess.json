@@ -448,7 +448,7 @@
                                     "mapper": {
                                         "cc": [],
                                         "to": [
-                                            "chess@turntabl.io"
+                                            "emailaddressgoeshere"
                                         ],
                                         "bcc": [],
                                         "from": "",
@@ -485,7 +485,7 @@
                                                 "items": []
                                             },
                                             "account": {
-                                                "label": "Chess Google connection (christiana.asare@turntabl.io)"
+                                                "label": "Chess Google connection (emailaddressgoeshere)"
                                             },
                                             "headers": {
                                                 "items": []
@@ -706,14 +706,14 @@
                             "mapper": {
                                 "ca": "",
                                 "qs": [],
-                                "url": "https://api.hubtel.com/v1/messages",
+                                "url": "apiurlgoeshere",
                                 "data": "{\n    \"From\":\"Chess Store\",\n    \"To\":\"{{2.phone}}\",\n    \"Content\":\"Hi {{2.firstname}}. Thank you. Your order has been received successfully!.Your items will be delivered at  {{2.selected_store.label}} {{2.selected_store.landmark}}. You can contact the pickup store at {{2.selected_store.contact}}. Kindly check your email for your order details.\"\n}",
                                 "gzip": true,
                                 "method": "post",
                                 "headers": [
                                     {
                                         "name": "Authorization",
-                                        "value": "Basic cWhsbGp4bG86dW9hbW9rZXE="
+                                        "value": "authvaluegoeshere"
                                     }
                                 ],
                                 "timeout": "",
@@ -967,7 +967,7 @@
                                                 "items": []
                                             },
                                             "account": {
-                                                "label": "Chess Google connection (christiana.asare@turntabl.io)"
+                                                "label": "Chess Google connection (emailaddressgoeshere)"
                                             },
                                             "headers": {
                                                 "items": []
@@ -1257,7 +1257,7 @@
                                         "label": "Sheet1"
                                     },
                                     "__IMTCONN__": {
-                                        "label": "Chess Google connection (christiana.asare@turntabl.io)"
+                                        "label": "Chess Google connection (emailaddressgoeshere)"
                                     },
                                     "spreadsheetId": {
                                         "label": "Chess Order Details"
@@ -1540,7 +1540,7 @@
                                                 "items": []
                                             },
                                             "account": {
-                                                "label": "Chess Google connection (christiana.asare@turntabl.io)"
+                                                "label": "Chess Google connection (emailaddressgoeshere)"
                                             },
                                             "headers": {
                                                 "items": []
@@ -1827,7 +1827,7 @@
                                         "items": []
                                     },
                                     "account": {
-                                        "label": "Chess Google connection (christiana.asare@turntabl.io)"
+                                        "label": "Chess Google connection (emailaddressgoeshere)"
                                     },
                                     "headers": {
                                         "items": []
@@ -2042,7 +2042,7 @@
                                     "mapper": {
                                         "cc": [],
                                         "to": [
-                                            "chess@turntabl.io"
+                                            "emailaddressgoeshere"
                                         ],
                                         "bcc": [],
                                         "from": "",
@@ -2079,7 +2079,7 @@
                                                 "items": []
                                             },
                                             "account": {
-                                                "label": "Chess Google connection (christiana.asare@turntabl.io)"
+                                                "label": "Chess Google connection (emailaddressgoeshere)"
                                             },
                                             "headers": {
                                                 "items": []
@@ -2329,7 +2329,7 @@
                             "mapper": {
                                 "cc": [],
                                 "to": [
-                                    "chess@turntabl.io"
+                                    "emailaddressgoeshere"
                                 ],
                                 "bcc": [],
                                 "from": "",
@@ -2366,7 +2366,7 @@
                                         "items": []
                                     },
                                     "account": {
-                                        "label": "Chess Google connection (christiana.asare@turntabl.io)"
+                                        "label": "Chess Google connection (emailaddressgoeshere)"
                                     },
                                     "headers": {
                                         "items": []
@@ -2581,7 +2581,7 @@
                                     "mapper": {
                                         "cc": [],
                                         "to": [
-                                            "chess@turntabl.io"
+                                            "emailaddressgoeshere"
                                         ],
                                         "bcc": [],
                                         "from": "",
@@ -2618,7 +2618,7 @@
                                                 "items": []
                                             },
                                             "account": {
-                                                "label": "Chess Google connection (christiana.asare@turntabl.io)"
+                                                "label": "Chess Google connection (emailaddressgoeshere)"
                                             },
                                             "headers": {
                                                 "items": []
