@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Bug Bounty Scan
+name: Bug Bounty Scan:
 
 on:
   push:
